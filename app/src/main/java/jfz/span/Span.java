@@ -36,6 +36,7 @@ import jfz.span.span.RoundSpan;
 public class Span {
     private List<Builder> builders;
     private int hightLightColor = Color.TRANSPARENT;
+    private OnClickSpanListener totalClickListener;
 
     private Span() {
         builders = new ArrayList<>();
@@ -54,27 +55,50 @@ public class Span {
         return new Builder(text);
     }
 
+    public Span totalClickListener(OnClickSpanListener listener) {
+        this.totalClickListener = listener;
+        return this;
+    }
+
     public void into(TextView tv) {
         if (tv != null && builders != null && builders.size() > 0) {
             SpannableStringBuilder string = new SpannableStringBuilder("");
+            String totalText = getTotalText(builders);
             for (int i = 0; i < builders.size(); i++) {
                 SpanBuilder builder = builders.get(i).getSpanBuilder();
-                SpannableString span = new SpannableString(builder.getText());
                 if (!TextUtils.isEmpty(builder.getText())) {
+                    SpannableString span = new SpannableString(builder.getText());
                     List<Object> spans = builder.getSpans();
                     for (Object style : spans) {
                         span.setSpan(style, 0, builder.getText().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                     }
+
                     for (Object style : builder.getSpansList()) {
                         span.setSpan(style, 0, builder.getText().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                     }
+
+                    if (totalClickListener != null) {
+                        span.setSpan(new Span.TextClickSpannable(totalText, false, totalClickListener), 0, builder.getText().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    }
+
                     string.append(span);
                 }
             }
+
             tv.setText(string);
             tv.setMovementMethod(LinkMovementMethodImpl.getInstance());
             tv.setHighlightColor(hightLightColor);
         }
+    }
+
+    private String getTotalText(List<Builder> builders) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < builders.size(); i++) {
+            if (!TextUtils.isEmpty(builders.get(i).getSpanBuilder().getText())) {
+                stringBuilder.append(builders.get(i).getSpanBuilder().getText());
+            }
+        }
+        return stringBuilder.toString();
     }
 
     public static class Builder implements BaseSpan<Builder> {
