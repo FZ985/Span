@@ -1,5 +1,6 @@
 package com.text.span;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
@@ -27,6 +28,11 @@ public class MainActivity extends AppCompatActivity {
         init();
     }
 
+    public static int dip2px(Context context, float dpValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
+    }
+
     private void init() {
         Span.impl()
                 .append(Span.builder("这事不对劲这事不对劲这事不对劲这事不对劲这事不对劲这事不对劲")
@@ -39,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                                 10,
                                 8f,
                                 8f)
-                                .textSize(main_tv.getTextSize() - 8)))
+                                .textSize(dip2px(MainActivity.this, 12))))
                 .into(main_tv);
 
         Span.impl()

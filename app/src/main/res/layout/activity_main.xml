@@ -10,16 +10,17 @@
 
     <TextView
         android:id="@+id/main_tv"
-        android:lineSpacingMultiplier="1.2"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:lineSpacingMultiplier="1.2"
+        android:textSize="16dp" />
 
     <TextView
         android:id="@+id/tv2"
-        android:lineSpacingMultiplier="1.2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp" />
+        android:layout_marginTop="100dp"
+        android:lineSpacingMultiplier="1.2" />
 
     <TextView
         android:id="@+id/custom_tv"
