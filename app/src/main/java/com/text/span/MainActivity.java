@@ -5,6 +5,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.Spanned;
+import android.text.style.ImageSpan;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -90,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(MainActivity.this, "点击了:" + text, Toast.LENGTH_SHORT).show();
                             }
                         }))
+                .append(Span.builder(" ").addSpans(new ImageSpan(this, R.mipmap.ic_launcher_round, ImageSpan.ALIGN_BASELINE), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE))
                 .append(Span.builder("啊啊啊啊啊啊啊"))
                 .append(Span.builder("·待发布").roundSpan(new RoundSpan(Color.parseColor("#50ff0000"), 6, Paint.Style.FILL, 10, 10, 8f, 8f)))
                 .into(custom_tv);
