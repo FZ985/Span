@@ -15,6 +15,7 @@ import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.QuoteSpan;
 import android.text.style.StrikethroughSpan;
+import android.text.style.StyleSpan;
 import android.text.style.UnderlineSpan;
 import android.util.SparseArray;
 import android.view.MotionEvent;
@@ -139,6 +140,12 @@ public class Span {
             return this;
         }
 
+        @Override
+        public Builder textStyle(int style) {
+            spanBuilder.textStyle(style);
+            return this;
+        }
+
         public SpanBuilder getSpanBuilder() {
             return spanBuilder;
         }
@@ -198,6 +205,21 @@ public class Span {
         @Override
         public SpanBuilder roundSpan(RoundSpan round) {
             spans.put(8, round);
+            return this;
+        }
+
+        /**
+         * 默认: Typeface.NORMAL
+         * 加粗: Typeface.BOLD
+         * 倾斜: Typeface.ITALIC
+         * 加粗并倾斜: Typeface.BOLD_ITALIC
+         *
+         * @param style
+         * @return
+         */
+        @Override
+        public SpanBuilder textStyle(int style) {
+            spans.put(9, new StyleSpan(style));
             return this;
         }
 

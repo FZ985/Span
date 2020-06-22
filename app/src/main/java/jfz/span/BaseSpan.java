@@ -25,6 +25,8 @@ public interface BaseSpan<T> {
     //允许左边加一条竖线
     T quoteLine(int color, int stripeWidth, int gapWidth);
 
+    T textStyle(int style);
+
     T click(Span.OnClickSpanListener listener);
 
     T roundSpan(RoundSpan spans);

@@ -2,6 +2,7 @@ package com.text.span;
 
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -41,19 +42,19 @@ public class MainActivity extends AppCompatActivity {
                                 .textSize(main_tv.getTextSize() - 8)))
                 .into(main_tv);
 
-
         Span.impl()
                 .append(Span.builder("这事不对劲这事不对劲这事不对劲这事不对劲这事不对劲这事不对劲")
                         .textColor(Color.parseColor("#333333")))
                 .append(Span.builder("·待发布")
-                        .roundSpan(new RoundSpan(Color.parseColor("#50ff0000"),
+                        .roundSpan(new RoundSpan(Color.parseColor("#008577"),
                                 6,
                                 Paint.Style.STROKE,
                                 10,
                                 10,
                                 8f,
                                 8f)
-                                .textSize(tv2.getTextSize() - 8)))
+                                .textSize(tv2.getTextSize() - 8)
+                                .textColor(Color.parseColor("#008577"))))
                 .into(tv2);
 
 
@@ -70,6 +71,12 @@ public class MainActivity extends AppCompatActivity {
                         .underLine())
                 .append(Span.builder("吼吼吼吼吼吼")
                         .deleteLine())
+                .append(Span.builder("加粗加粗加粗")
+                        .textStyle(Typeface.BOLD))
+                .append(Span.builder("倾斜倾斜倾斜")
+                        .textStyle(Typeface.ITALIC))
+                .append(Span.builder("加粗倾斜加粗倾斜加粗倾斜")
+                        .textStyle(Typeface.BOLD_ITALIC))
                 .append(Span.builder("点点点点")
                         .click(new Span.OnClickSpanListener() {
                             @Override

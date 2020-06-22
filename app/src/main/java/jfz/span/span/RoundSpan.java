@@ -18,6 +18,8 @@ import jfz.span.BaseSpan;
 public class RoundSpan extends ReplacementSpan implements BaseSpan.ISpan {
     private int borderWidth = 2;//边框线宽度
     private int backgroundColor = Color.TRANSPARENT;//背景色
+    private int textColor;
+    private boolean isTextColor;
     private int radius;
     private Paint.Style style = Paint.Style.FILL;
     private int size;
@@ -33,13 +35,16 @@ public class RoundSpan extends ReplacementSpan implements BaseSpan.ISpan {
         this.marginRight = marginRight;
         this.offsetLeft = offsetLeft;
         this.offsetRight = offsetRight;
-        if (this.style == Paint.Style.FILL) {
-            borderWidth = 0;
-        }
     }
 
     public RoundSpan textSize(float textSize) {
         this.textSize = textSize;
+        return this;
+    }
+
+    public RoundSpan textColor(int textColor) {
+        isTextColor = true;
+        this.textColor = textColor;
         return this;
     }
 
@@ -62,12 +67,16 @@ public class RoundSpan extends ReplacementSpan implements BaseSpan.ISpan {
         paint.setColor(backgroundColor);
         RectF oval = new RectF(x + offsetLeft, y + paint.ascent(), x + size - offsetRight, y + paint.descent());
         canvas.drawRoundRect(oval, radius, radius, paint);
-        paint.setColor(textColor);
+        paint.setColor(isTextColor ? RoundSpan.this.textColor : textColor);
         paint.setTextSize(textSize == 0 ? paint.getTextSize() : textSize);
         paint.setStrokeWidth(0);
         float textX = x + (size / 2 - (paint.measureText(text, start, end)) / 2);
-        canvas.drawText(text, start, end, textX, y - paint.descent() / 2, paint);
-
+        //做一下双方都设置了文字大小的兼容
+        if (textSize == 0) {
+            canvas.drawText(text, start, end, textX, y, paint);
+        } else {
+            canvas.drawText(text, start, end, textX, y - paint.descent() / 2 + borderWidth, paint);
+        }
 //        canvas.drawText(text, start, end, x + offsetLeft + marginLeft + 2 * borderWidth, y, paint);
     }
 
