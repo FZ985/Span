@@ -102,5 +102,12 @@ public class MainActivity extends AppCompatActivity {
                     }
                 })
                 .into(custom_tv);
+
+        custom_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "click", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
