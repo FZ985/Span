@@ -2,13 +2,13 @@
 textview的span的使用
 
 
-Span.impl()
-                .append(Span.builder("哈哈哈"))
-                .append(Span.builder("嘿嘿嘿嘿嘿")
-                        .backgroundColor(Color.GREEN))
-                .append(Span.builder("呵呵呵呵呵呵呵呵")
-                        .textColor(Color.RED))
-                .append(Span.builder("嘻嘻嘻嘻嘻嘻嘻嘻")
+Span.impl()   
+.append(Span.builder("哈哈哈"))    
+.append(Span.builder("嘿嘿嘿嘿嘿")    
+        .backgroundColor(Color.GREEN))
+.append(Span.builder("呵呵呵呵呵呵呵呵")    
+        .textColor(Color.RED))    
+.append(Span.builder("嘻嘻嘻嘻嘻嘻嘻嘻")
                         .textSize(30))
                 .append(Span.builder("哼哼哼哼哼")
                         .textColor(Color.YELLOW)
