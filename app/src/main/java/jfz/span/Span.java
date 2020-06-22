@@ -65,8 +65,6 @@ public class Span {
                     for (Object style : spans) {
                         span.setSpan(style, 0, builder.getText().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                     }
-//                    string.append(span);
-
                     for (Object style : builder.getSpansList()) {
                         span.setSpan(style, 0, builder.getText().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                     }
