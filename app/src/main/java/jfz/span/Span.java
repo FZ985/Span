@@ -78,7 +78,7 @@ public class Span {
                     }
 
                     if (totalClickListener != null) {
-                        span.setSpan(new Span.TextClickSpannable(totalText, false, totalClickListener), 0, builder.getText().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                        span.setSpan(new Span.TextClickSpannable(totalText, builder.isUnderLine, totalClickListener), 0, builder.getText().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                     }
 
                     string.append(span);
@@ -177,7 +177,7 @@ public class Span {
         private SparseArray<Object> spans;
         private List<Object> spanslist;
         private String text;
-        private boolean isUnderLine = false;
+        public boolean isUnderLine = false;
 
         private SpanBuilder(String text) {
             if (text == null || text.equals("")) text = "null";

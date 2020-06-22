@@ -86,6 +86,8 @@ public class MainActivity extends AppCompatActivity {
                 .append(Span.builder("加粗倾斜加粗倾斜加粗倾斜")
                         .textStyle(Typeface.BOLD_ITALIC))
                 .append(Span.builder("点击点击点击")
+                        .textColor(Color.BLUE)
+                        .underLine()
                         .click(new Span.OnClickSpanListener() {
                             @Override
                             public void onClick(String text, View widget) {
@@ -103,11 +105,11 @@ public class MainActivity extends AppCompatActivity {
                 })
                 .into(custom_tv);
 
-        custom_tv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "click", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        custom_tv.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(MainActivity.this, "click", Toast.LENGTH_SHORT).show();
+//            }
+//        });
     }
 }
