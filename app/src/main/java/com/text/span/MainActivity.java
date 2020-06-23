@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Spanned;
 import android.text.style.ImageSpan;
@@ -14,11 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.CustomTarget;
-import com.bumptech.glide.request.transition.Transition;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.ColorUtils;
 import jfz.span.Span;
@@ -40,7 +35,14 @@ public class MainActivity extends AppCompatActivity {
         main_image = findViewById(R.id.main_image);
         init();
 
-//        Glide.with(this)
+        int[] colors = new int[]{ColorUtils.setAlphaComponent(Color.parseColor("#222222"), 220), Color.TRANSPARENT, ColorUtils.setAlphaComponent(Color.parseColor("#222222"), 220)};
+        Glide.with(this)
+                .load("http://e.hiphotos.baidu.com/zhidao/pic/item/b64543a98226cffc7a951157b8014a90f703ea9c.jpg")
+                .centerCrop()
+                .transform(new ColorsFilterTransformation(colors))
+                .into(main_image);
+
+        //        Glide.with(this)
 //                .asBitmap()
 //                .load("http://e.hiphotos.baidu.com/zhidao/pic/item/b64543a98226cffc7a951157b8014a90f703ea9c.jpg")
 //                .centerCrop()
@@ -57,22 +59,22 @@ public class MainActivity extends AppCompatActivity {
 //
 //                    }
 //                });
-        Glide.with(this)
-                .asDrawable()
-                .load("http://e.hiphotos.baidu.com/zhidao/pic/item/b64543a98226cffc7a951157b8014a90f703ea9c.jpg")
-                .centerCrop()
-                .into(new CustomTarget<Drawable>() {
-                    @Override
-                    public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
-                        resource = Image.drawDrawableShadow(resource, ColorUtils.setAlphaComponent(Color.parseColor("#222222"), 200));
-                        main_image.setImageDrawable(resource);
-                    }
-
-                    @Override
-                    public void onLoadCleared(@Nullable Drawable placeholder) {
-
-                    }
-                });
+//        Glide.with(this)
+//                .asDrawable()
+//                .load("http://e.hiphotos.baidu.com/zhidao/pic/item/b64543a98226cffc7a951157b8014a90f703ea9c.jpg")
+//                .centerCrop()
+//                .into(new CustomTarget<Drawable>() {
+//                    @Override
+//                    public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+//                        resource = Image.drawDrawableShadow(resource, ColorUtils.setAlphaComponent(Color.parseColor("#222222"), 200));
+//                        main_image.setImageDrawable(resource);
+//                    }
+//
+//                    @Override
+//                    public void onLoadCleared(@Nullable Drawable placeholder) {
+//
+//                    }
+//                });
     }
 
     public static int dip2px(Context context, float dpValue) {
