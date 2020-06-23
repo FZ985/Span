@@ -8,10 +8,15 @@ import android.os.Bundle;
 import android.text.Spanned;
 import android.text.style.ImageSpan;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.text.span.glide.ColorFilterTransformation;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.ColorUtils;
 import jfz.span.Span;
 import jfz.span.span.RoundSpan;
 
@@ -19,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     TextView main_tv;
     TextView custom_tv;
     TextView tv2;
+    ImageView main_image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +33,14 @@ public class MainActivity extends AppCompatActivity {
         main_tv = findViewById(R.id.main_tv);
         custom_tv = findViewById(R.id.custom_tv);
         tv2 = findViewById(R.id.tv2);
+        main_image = findViewById(R.id.main_image);
         init();
+
+        Glide.with(this)
+                .load("http://e.hiphotos.baidu.com/zhidao/pic/item/b64543a98226cffc7a951157b8014a90f703ea9c.jpg")
+                .centerCrop()
+                .transform(new ColorFilterTransformation(ColorUtils.setAlphaComponent(getResources().getColor(R.color.colorPrimary), 180)))
+                .into(main_image);
     }
 
     public static int dip2px(Context context, float dpValue) {
