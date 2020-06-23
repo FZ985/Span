@@ -1,7 +1,6 @@
 package com.text.span;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
@@ -41,16 +40,32 @@ public class MainActivity extends AppCompatActivity {
         main_image = findViewById(R.id.main_image);
         init();
 
+//        Glide.with(this)
+//                .asBitmap()
+//                .load("http://e.hiphotos.baidu.com/zhidao/pic/item/b64543a98226cffc7a951157b8014a90f703ea9c.jpg")
+//                .centerCrop()
+////                .transform(new ColorFilterTransformation(ColorUtils.setAlphaComponent(Color.parseColor("#222222"), 220)))
+//                .into(new CustomTarget<Bitmap>() {
+//                    @Override
+//                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+//                        resource = Image.drawBitmapShadow(resource, ColorUtils.setAlphaComponent(Color.parseColor("#222222"), 200));
+//                        main_image.setImageBitmap(resource);
+//                    }
+//
+//                    @Override
+//                    public void onLoadCleared(@Nullable Drawable placeholder) {
+//
+//                    }
+//                });
         Glide.with(this)
-                .asBitmap()
+                .asDrawable()
                 .load("http://e.hiphotos.baidu.com/zhidao/pic/item/b64543a98226cffc7a951157b8014a90f703ea9c.jpg")
                 .centerCrop()
-//                .transform(new ColorFilterTransformation(ColorUtils.setAlphaComponent(Color.parseColor("#222222"), 220)))
-                .into(new CustomTarget<Bitmap>() {
+                .into(new CustomTarget<Drawable>() {
                     @Override
-                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                        resource = Image.drawBitmapShadow(resource, ColorUtils.setAlphaComponent(Color.parseColor("#222222"), 200));
-                        main_image.setImageBitmap(resource);
+                    public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                        resource = Image.drawDrawableShadow(resource, ColorUtils.setAlphaComponent(Color.parseColor("#222222"), 200));
+                        main_image.setImageDrawable(resource);
                     }
 
                     @Override
