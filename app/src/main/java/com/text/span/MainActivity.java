@@ -1,9 +1,11 @@
 package com.text.span;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Spanned;
 import android.text.style.ImageSpan;
@@ -13,8 +15,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.text.span.glide.ColorFilterTransformation;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.transition.Transition;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.ColorUtils;
 import jfz.span.Span;
@@ -37,10 +42,22 @@ public class MainActivity extends AppCompatActivity {
         init();
 
         Glide.with(this)
+                .asBitmap()
                 .load("http://e.hiphotos.baidu.com/zhidao/pic/item/b64543a98226cffc7a951157b8014a90f703ea9c.jpg")
                 .centerCrop()
-                .transform(new ColorFilterTransformation(ColorUtils.setAlphaComponent(getResources().getColor(R.color.colorPrimary), 180)))
-                .into(main_image);
+//                .transform(new ColorFilterTransformation(ColorUtils.setAlphaComponent(Color.parseColor("#222222"), 220)))
+                .into(new CustomTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                        resource = Image.drawBitmapShadow(resource, ColorUtils.setAlphaComponent(Color.parseColor("#222222"), 200));
+                        main_image.setImageBitmap(resource);
+                    }
+
+                    @Override
+                    public void onLoadCleared(@Nullable Drawable placeholder) {
+
+                    }
+                });
     }
 
     public static int dip2px(Context context, float dpValue) {

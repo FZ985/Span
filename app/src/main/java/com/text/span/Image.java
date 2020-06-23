@@ -2,6 +2,7 @@ package com.text.span;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.PorterDuff;
 
 /**
  * Create by JFZ
@@ -13,7 +14,7 @@ public class Image {
         Bitmap outB = bitmap.copy(Bitmap.Config.RGB_565, true);
         Canvas canvas = new Canvas(outB);
         canvas.drawBitmap(bitmap, 0, 0, null);
-        canvas.drawColor(color);
+        canvas.drawColor(color, PorterDuff.Mode.DST_OUT);
         return outB;
     }
 }
