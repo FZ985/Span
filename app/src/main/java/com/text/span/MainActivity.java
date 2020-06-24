@@ -12,10 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.ColorUtils;
 import jfz.span.Span;
 import jfz.span.span.RoundSpan;
 
@@ -34,47 +31,6 @@ public class MainActivity extends AppCompatActivity {
         tv2 = findViewById(R.id.tv2);
         main_image = findViewById(R.id.main_image);
         init();
-
-        int[] colors = new int[]{ColorUtils.setAlphaComponent(Color.parseColor("#222222"), 220), Color.TRANSPARENT, ColorUtils.setAlphaComponent(Color.parseColor("#222222"), 220)};
-        Glide.with(this)
-                .load("http://e.hiphotos.baidu.com/zhidao/pic/item/b64543a98226cffc7a951157b8014a90f703ea9c.jpg")
-                .centerCrop()
-                .transform(new ColorsFilterTransformation(colors))
-                .into(main_image);
-
-        //        Glide.with(this)
-//                .asBitmap()
-//                .load("http://e.hiphotos.baidu.com/zhidao/pic/item/b64543a98226cffc7a951157b8014a90f703ea9c.jpg")
-//                .centerCrop()
-////                .transform(new ColorFilterTransformation(ColorUtils.setAlphaComponent(Color.parseColor("#222222"), 220)))
-//                .into(new CustomTarget<Bitmap>() {
-//                    @Override
-//                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-//                        resource = Image.drawBitmapShadow(resource, ColorUtils.setAlphaComponent(Color.parseColor("#222222"), 200));
-//                        main_image.setImageBitmap(resource);
-//                    }
-//
-//                    @Override
-//                    public void onLoadCleared(@Nullable Drawable placeholder) {
-//
-//                    }
-//                });
-//        Glide.with(this)
-//                .asDrawable()
-//                .load("http://e.hiphotos.baidu.com/zhidao/pic/item/b64543a98226cffc7a951157b8014a90f703ea9c.jpg")
-//                .centerCrop()
-//                .into(new CustomTarget<Drawable>() {
-//                    @Override
-//                    public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
-//                        resource = Image.drawDrawableShadow(resource, ColorUtils.setAlphaComponent(Color.parseColor("#222222"), 200));
-//                        main_image.setImageDrawable(resource);
-//                    }
-//
-//                    @Override
-//                    public void onLoadCleared(@Nullable Drawable placeholder) {
-//
-//                    }
-//                });
     }
 
     public static int dip2px(Context context, float dpValue) {

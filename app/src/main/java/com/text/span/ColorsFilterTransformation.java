@@ -57,8 +57,13 @@ public class ColorsFilterTransformation implements Transformation<Bitmap> {
         Bitmap toTransform = resource.get();
         int targetWidth = outWidth == Target.SIZE_ORIGINAL ? toTransform.getWidth() : outWidth;
         int targetHeight = outHeight == Target.SIZE_ORIGINAL ? toTransform.getHeight() : outHeight;
+        System.out.println("transform_checkWidth:" + (outWidth == Target.SIZE_ORIGINAL));
+        System.out.println("transform_checkHeight:" + (outHeight == Target.SIZE_ORIGINAL));
+        System.out.println("transform_transformWidth:" + toTransform.getWidth());
+        System.out.println("transform_transformHeight:" + toTransform.getHeight());
+        System.out.println("transform_outWidth:" + outWidth);
+        System.out.println("transform_outHeight:" + outHeight);
         Bitmap transformed = transform(context.getApplicationContext(), bitmapPool, toTransform, targetWidth, targetHeight);
-
         final Resource<Bitmap> result;
         if (toTransform.equals(transformed)) {
             result = resource;
