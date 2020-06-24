@@ -1,9 +1,11 @@
 package com.text.span;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Spanned;
 import android.text.style.ImageSpan;
@@ -12,6 +14,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.FitCenter;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.transition.Transition;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import jfz.span.Span;
 import jfz.span.span.RoundSpan;
@@ -30,6 +40,42 @@ public class MainActivity extends AppCompatActivity {
         custom_tv = findViewById(R.id.custom_tv);
         tv2 = findViewById(R.id.tv2);
         main_image = findViewById(R.id.main_image);
+
+        int[] colors = new int[]{
+                Color.argb(100, 255, 0, 0),
+                Color.TRANSPARENT,
+                Color.argb(100, 0, 0, 255)
+        };
+
+        Glide.with(this)
+                .asBitmap()
+                .load("http://d.hiphotos.baidu.com/zhidao/pic/item/6a63f6246b600c334c3e91cb1e4c510fd9f9a16a.jpg")
+//                .transform(new ColorsFilterTransformation(colors, ColorsFilterTransformation.Type.LB_RT), new FitCenter(), new RoundedCorners(30))
+//                .transform(new ColorsFilterTransformation(colors, ColorsFilterTransformation.Type.LT_RB), new FitCenter(), new RoundedCorners(30))
+                .transform(new ColorsFilterTransformation(colors, ColorsFilterTransformation.Type.L_R), new FitCenter(), new RoundedCorners(30))
+//                .transform(new ColorsFilterTransformation(colors), new FitCenter(), new RoundedCorners(30))
+//                .transform(new ColorsFilterTransformation(colors, new ColorsFilterTransformation.CustomXYValues() {
+//                    @Override
+//                    public Shader getShader(int width, int height) {
+//                        final int[] GRADIENT_COLORS = new int[]{
+//                                Color.RED, Color.YELLOW, Color.BLUE, Color.GREEN, Color.WHITE, Color.RED};
+//                        final float[] GRADIENT_POSITONS = new float[]{
+//                                0.0f, 0.5f, 0.55f, 0.6f, 0.65f, 1.0f};
+//                        SweepGradient shader = new SweepGradient(width / 2, height / 2, GRADIENT_COLORS, null);
+//                        return shader;
+//                    }
+//                }), new FitCenter(), new RoundedCorners(30))
+                .into(new CustomTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                        main_image.setImageBitmap(resource);
+                    }
+
+                    @Override
+                    public void onLoadCleared(@Nullable Drawable placeholder) {
+
+                    }
+                });
 
         init();
     }

@@ -27,17 +27,27 @@ public class ColorsFilterTransformation implements Transformation<Bitmap> {
 
     private static final int VERSION = 1;
     private static final String ID = "jp.wasabeef.glide.transformations.ColorsFilterTransformation." + VERSION;
-
+    private CustomXYValues values;
     private int[] colors;
 
+    public interface CustomXYValues {
+        Shader getShader(int width, int height);
+    }
+
     public enum Type {
-        T_B, LT_RB, L_R, LB_RT
+        T_B, LT_RB, L_R, LB_RT, CUSTOM;
     }
 
     private Type type = Type.T_B;
 
     public ColorsFilterTransformation(int[] colors) {
         this(colors, Type.T_B);
+    }
+
+    public ColorsFilterTransformation(int[] colors, CustomXYValues values) {
+        this.colors = colors;
+        this.values = values;
+        this.type = Type.CUSTOM;
     }
 
     public ColorsFilterTransformation(int[] colors, Type type) {
@@ -85,7 +95,7 @@ public class ColorsFilterTransformation implements Transformation<Bitmap> {
 
         canvas.drawBitmap(toTransform, 0, 0, paint);
 
-        LinearGradient shader = null;
+        Shader shader = null;
         switch (type) {
             default:
             case T_B:
@@ -100,8 +110,21 @@ public class ColorsFilterTransformation implements Transformation<Bitmap> {
             case LT_RB:
                 shader = new LinearGradient(0, 0, width, height, colors, null, Shader.TileMode.CLAMP);
                 break;
+            case CUSTOM:
+                if (values == null) {
+                    throw new IllegalArgumentException(
+                            "The CustomXYValues is null");
+                }
+                shader = values.getShader(width, height);
+                if (shader == null) {
+                    throw new IllegalArgumentException(
+                            "The Shader is null");
+                }
+                break;
         }
-        paint.setShader(shader);
+        if (shader != null) {
+            paint.setShader(shader);
+        }
         canvas.drawRect(0, 0, width, height, paint);
         return bitmap;
     }
