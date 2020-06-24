@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         custom_tv = findViewById(R.id.custom_tv);
         tv2 = findViewById(R.id.tv2);
         main_image = findViewById(R.id.main_image);
+
         init();
     }
 
